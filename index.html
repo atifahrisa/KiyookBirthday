@@ -49,17 +49,22 @@
     pointer-events: none;
     overflow: hidden;
   }
+  /* Bunga naik dari bawah — sekarang pakai stiker1/stiker2 */
   .flower {
     position: absolute;
-    font-size: clamp(20px, 4vw, 40px);
     animation: floatFlower linear infinite;
-    opacity: 0.5;
+  }
+  .flower img {
+    width: clamp(28px, 5vw, 48px);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.10));
   }
 
   @keyframes floatFlower {
-    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
+    0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+    8%   { opacity: 0.7; }
+    90%  { opacity: 0.7; }
     100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
   }
 
@@ -123,10 +128,9 @@
   }
 
   .companion img {
-    width: clamp(55px, 11vw, 90px);   /* ukuran stiker — ubah sesuai selera */
+    width: clamp(80px, 15vw, 130px);   /* lebih besar dari sebelumnya */
     height: auto;
     display: block;
-    /* drop-shadow agar stiker tidak flat di atas background */
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
   }
 
@@ -139,8 +143,8 @@
   .s6 { bottom: 12%; left: 28%; animation-delay: 0.5s; }
 
   /* Variasi ukuran biar tidak seragam */
-  .s2 img, .s6 img { width: clamp(44px, 8vw, 68px); }
-  .s3 img          { width: clamp(38px, 7vw, 58px); }
+  .s2 img, .s6 img { width: clamp(65px, 12vw, 105px); }
+  .s3 img          { width: clamp(55px, 10vw, 88px);  }
 
   @keyframes swimFloat {
     0%, 100% { transform: translateY(0)    rotate(-4deg); }
@@ -522,9 +526,12 @@
     gap: 24px;
   }
 
-  .final-flowers {
-    font-size: clamp(30px, 8vw, 60px);
+  .final-flowers img {
+    width: clamp(55px, 10vw, 80px);
+    height: auto;
     animation: spinSlow 8s linear infinite;
+    display: block;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
   }
   @keyframes spinSlow { to { transform: rotate(360deg); } }
 
@@ -536,7 +543,12 @@
     box-shadow: 0 16px 48px rgba(255,190,0,0.3);
   }
 
-  .final-card .emoji-big { font-size: clamp(50px, 12vw, 80px); margin-bottom: 12px; }
+  .final-card .emoji-big { margin-bottom: 12px; }
+  .final-card .emoji-big img {
+    width: clamp(70px, 14vw, 100px);
+    height: auto;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+  }
 
   .final-card h2 {
     font-family: 'Baloo 2', cursive;
@@ -651,7 +663,7 @@
     <div class="companion s6"><img src="stiker3.png" alt="stiker"></div>
   </div>
 
-  <p class="above-gift-text">Ada sesuatu buat kamu...</p>
+  <p class="above-gift-text">🌸 Ada sesuatu buat kamu... 🌸</p>
 
   <div class="gift-scene">
     <div class="gift-svg-wrapper">
@@ -671,10 +683,6 @@
         <ellipse cx="200" cy="55" rx="33" ry="18" fill="#FFB74D" transform="rotate(25 200 55)"/>
         <ellipse cx="150" cy="52" rx="22" ry="18" fill="#FF8C00"/>
         <ellipse cx="150" cy="52" rx="14" ry="11" fill="#FFA726"/>
-        <text x="65" y="230" font-size="24" opacity="0.7">⭐</text>
-        <text x="195" y="220" font-size="20" opacity="0.6">✨</text>
-        <text x="80" y="270" font-size="16" opacity="0.5">🌸</text>
-        <text x="185" y="268" font-size="18" opacity="0.6">🌺</text>
         <defs>
           <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
@@ -727,7 +735,7 @@
         <div class="slide">
           <div class="slide-photo">
             <img src="foto2.jpg" alt="Foto waktu sekolah"
-                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🎒📚</div><div class=\'photo-label\'>📸 foto2.jpg</div></div>'">
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🎒📚</div><div class=\'photo-label\'>📸 Foto2.jpg</div></div>'">
           </div>
           <div class="slide-info">
             <div class="slide-number">Foto 02 / 06</div>
@@ -858,10 +866,12 @@
 <!-- ============================================================ -->
 <div id="page4" class="page">
 
-  <div class="final-flowers">🌻</div>
+  <div class="final-flowers">
+    <img src="stiker4.png" alt="bunga">
+  </div>
 
   <div class="final-card">
-    <div class="emoji-big">🎂</div>
+    <div class="emoji-big"><img src="stiker5.png" alt="kue ulang tahun"></div>
     <h2>Barakallah fik, Kiyook! 💛</h2>
     <p>
       Belumpa jadi milliader nah, tapi bisaka kasi sedikit rejeki buat kiyook yang lagi ulang tahun.
@@ -910,20 +920,24 @@ let touchStartY = 0;
 let videoCheckInterval = null;
 
 // ============================================================
-// FLOWERS BACKGROUND
+// FLOWERS BACKGROUND — pakai stiker1.png & stiker2.png
 // ============================================================
-const flowerEmojis = ['🌸','🌼','🌺','🌻','🌷','💐','🌹','🪷'];
+const stikerList = ['stiker1.png', 'stiker2.png'];
 function createFlowers() {
   const bg = document.getElementById('flowersBg');
   for (let i = 0; i < 18; i++) {
-    const f = document.createElement('span');
+    const f = document.createElement('div');
     f.className = 'flower';
-    f.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+    const img = document.createElement('img');
+    img.src = stikerList[i % 2];   // bergantian stiker1 & stiker2
+    img.alt = 'stiker';
+    f.appendChild(img);
     f.style.left = Math.random() * 100 + 'vw';
-    f.style.animationDuration = (6 + Math.random() * 8) + 's';
-    f.style.animationDelay = (Math.random() * 8) + 's';
-    f.style.fontSize = (16 + Math.random() * 24) + 'px';
-    f.style.opacity = (0.25 + Math.random() * 0.35);
+    f.style.animationDuration = (7 + Math.random() * 8) + 's';
+    f.style.animationDelay  = (Math.random() * 8) + 's';
+    // Variasi ukuran gambar sedikit
+    const size = 26 + Math.floor(Math.random() * 22);
+    img.style.width = size + 'px';
     bg.appendChild(f);
   }
 }
