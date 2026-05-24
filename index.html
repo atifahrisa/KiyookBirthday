@@ -44,7 +44,6 @@
     position: relative;
   }
 
-  /* Floating flowers background */
   .flowers-bg {
     position: absolute; inset: 0;
     pointer-events: none;
@@ -64,7 +63,6 @@
     100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
   }
 
-  /* Opening text */
   .opening-text {
     text-align: center;
     z-index: 10;
@@ -92,7 +90,6 @@
     50% { opacity: 1; }
   }
 
-  /* Gift box container */
   .gift-scene {
     position: relative;
     z-index: 10;
@@ -112,32 +109,44 @@
   }
   .gift-svg-wrapper:hover { transform: scale(1.04) rotate(-1deg); }
 
-  /* Floating companions */
+  /* ── Stiker container ── */
   .companions {
     position: absolute;
     inset: 0;
     pointer-events: none;
   }
 
+  /* Base stiker: pakai <img> bukan teks/emoji */
   .companion {
     position: absolute;
-    font-size: clamp(28px, 6vw, 50px);
     animation: swimFloat 3s ease-in-out infinite;
   }
 
-  .fish1 { top: 15%; left: 5%; animation-delay: 0s; }
-  .fish2 { top: 30%; right: 8%; animation-delay: 0.8s; font-size: clamp(22px, 4vw, 38px); }
-  .fish3 { bottom: 20%; left: 10%; animation-delay: 1.5s; font-size: clamp(18px, 3vw, 30px); }
-  .fish4 { bottom: 30%; right: 5%; animation-delay: 0.4s; }
-  .duck1 { top: 8%; left: 35%; animation-delay: 1s; }
-  .duck2 { bottom: 15%; right: 25%; animation-delay: 0.6s; font-size: clamp(22px, 4vw, 38px); }
-
-  @keyframes swimFloat {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-18px) rotate(5deg); }
+  .companion img {
+    width: clamp(55px, 11vw, 90px);   /* ukuran stiker — ubah sesuai selera */
+    height: auto;
+    display: block;
+    /* drop-shadow agar stiker tidak flat di atas background */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
   }
 
-  /* Sparkles */
+  /* 6 posisi acak di sekitar layar */
+  .s1 { top: 12%; left: 4%;   animation-delay: 0s;   }
+  .s2 { top: 28%; right: 6%;  animation-delay: 0.7s; }
+  .s3 { top: 55%; left: 6%;   animation-delay: 1.4s; }
+  .s4 { bottom: 18%; right: 4%; animation-delay: 0.3s; }
+  .s5 { top: 7%;  left: 40%;  animation-delay: 1.0s; }
+  .s6 { bottom: 12%; left: 28%; animation-delay: 0.5s; }
+
+  /* Variasi ukuran biar tidak seragam */
+  .s2 img, .s6 img { width: clamp(44px, 8vw, 68px); }
+  .s3 img          { width: clamp(38px, 7vw, 58px); }
+
+  @keyframes swimFloat {
+    0%, 100% { transform: translateY(0)    rotate(-4deg); }
+    50%      { transform: translateY(-16px) rotate(4deg); }
+  }
+
   .sparkle {
     position: absolute;
     font-size: clamp(14px, 2.5vw, 22px);
@@ -149,7 +158,6 @@
     50% { transform: scale(1.3) rotate(20deg); opacity: 1; }
   }
 
-  /* Fade in text above gift */
   .above-gift-text {
     font-family: 'Baloo 2', cursive;
     font-size: clamp(16px, 3.5vw, 28px);
@@ -194,7 +202,6 @@
     font-size: clamp(13px, 2.5vw, 16px);
   }
 
-  /* Slideshow */
   .slideshow-container {
     width: 100%;
     max-width: 600px;
@@ -219,23 +226,21 @@
     overflow: hidden;
   }
 
+  /* ── Photo area: actual image ── */
   .slide-photo {
     width: 100%;
     aspect-ratio: 4/3;
-    object-fit: cover;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--yellow-soft), var(--yellow-light));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(60px, 15vw, 120px);
   }
-
   .slide-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
+  /* ── Photo placeholder (for slides without real photo) ── */
   .photo-placeholder {
     width: 100%;
     aspect-ratio: 4/3;
@@ -300,7 +305,6 @@
     line-height: 1.6;
   }
 
-  /* Navigation */
   .slide-nav {
     display: flex;
     align-items: center;
@@ -453,34 +457,19 @@
     overflow: hidden;
     box-shadow: 0 16px 48px rgba(255,190,0,0.35);
     aspect-ratio: 16/9;
-    background: #FFE082;
+    background: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
   }
 
-  .video-placeholder-msg {
-    text-align: center;
-    padding: 20px;
-    z-index: 1;
-  }
-  .video-placeholder-msg .icon { font-size: 60px; margin-bottom: 10px; }
-  .video-placeholder-msg p {
-    font-family: 'Baloo 2', cursive;
-    font-size: clamp(14px, 3vw, 18px);
-    color: var(--text-dark);
-  }
-  .video-placeholder-msg code {
-    background: rgba(255,255,255,0.7);
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-family: monospace;
-    color: #5A3E00;
+  .video-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
     display: block;
-    margin-top: 8px;
-    word-break: break-all;
   }
 
   .video-frame iframe {
@@ -621,10 +610,8 @@
     50% { transform: scaleY(1); }
   }
 
-  /* ===================== SWIPE SUPPORT ===================== */
   .slides-wrapper { touch-action: pan-y; }
 
-  /* ===================== RESPONSIVE ===================== */
   @media (max-width: 480px) {
     #page2, #page3, #page4 { padding: 16px 12px; }
     .slide-info { padding: 12px 14px 16px; }
@@ -639,77 +626,55 @@
 <!-- ============================================================ -->
 <div id="page1" class="page active" onclick="openGift()">
 
-  <!-- Floating flowers background -->
   <div class="flowers-bg" id="flowersBg"></div>
 
-  <!-- Sparkles -->
+  <!-- sparkle tetap pakai emoji kecil sebagai aksen -->
   <span class="sparkle" style="top:10%;left:15%;animation-delay:0.2s">✨</span>
-  <span class="sparkle" style="top:15%;right:18%;animation-delay:0.8s">⭐</span>
+  <span class="sparkle" style="top:15%;right:18%;animation-delay:0.8s">✨</span>
   <span class="sparkle" style="bottom:25%;left:20%;animation-delay:1.2s">✨</span>
-  <span class="sparkle" style="bottom:18%;right:22%;animation-delay:0.5s">🌟</span>
-  <span class="sparkle" style="top:40%;left:8%;animation-delay:1.5s">⭐</span>
-  <span class="sparkle" style="top:35%;right:10%;animation-delay:0.3s">✨</span>
+  <span class="sparkle" style="bottom:18%;right:22%;animation-delay:0.5s">✨</span>
 
-  <!-- Floating companions -->
+  <!--
+    ╔═══════════════════════════════════════════════════════════╗
+    ║  STIKER CUSTOM — ganti src sesuai nama file di repo      ║
+    ║  Letakkan stiker1.png / stiker2.png / stiker3.png        ║
+    ║  di folder yang sama dengan index.html di GitHub kamu.   ║
+    ║  6 posisi acak, diisi bergiliran dari 3 stiker.          ║
+    ╚═══════════════════════════════════════════════════════════╝
+  -->
   <div class="companions">
-    <span class="companion fish1">🐟</span>
-    <span class="companion fish2">🐠</span>
-    <span class="companion fish3">🐡</span>
-    <span class="companion fish4">🐟</span>
-    <span class="companion duck1">🐣</span>
-    <span class="companion duck2">🐥</span>
+    <div class="companion s1"><img src="stiker1.png" alt="stiker"></div>
+    <div class="companion s2"><img src="stiker2.png" alt="stiker"></div>
+    <div class="companion s3"><img src="stiker3.png" alt="stiker"></div>
+    <div class="companion s4"><img src="stiker1.png" alt="stiker"></div>
+    <div class="companion s5"><img src="stiker2.png" alt="stiker"></div>
+    <div class="companion s6"><img src="stiker3.png" alt="stiker"></div>
   </div>
 
-  <!-- Above text -->
-  <p class="above-gift-text">🌸 Ada sesuatu buat kamu... 🌸</p>
+  <p class="above-gift-text">Ada sesuatu buat kamu...</p>
 
-  <!-- Gift scene -->
   <div class="gift-scene">
     <div class="gift-svg-wrapper">
-      <!-- SVG Gift Box -->
       <svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
-        <!-- Shadow -->
         <ellipse cx="150" cy="310" rx="110" ry="14" fill="rgba(200,140,0,0.2)"/>
-        
-        <!-- Box bottom -->
         <rect x="30" y="155" width="240" height="150" rx="12" fill="#FFD700"/>
         <rect x="30" y="155" width="240" height="150" rx="12" fill="url(#boxGrad)"/>
-        
-        <!-- Box stripes -->
         <rect x="135" y="155" width="30" height="150" fill="rgba(255,255,255,0.25)" rx="0"/>
-        
-        <!-- Box side shine -->
         <rect x="32" y="157" width="12" height="146" rx="6" fill="rgba(255,255,255,0.15)"/>
-        
-        <!-- Box lid -->
         <rect x="20" y="125" width="260" height="40" rx="10" fill="#FFC107"/>
         <rect x="20" y="125" width="260" height="40" rx="10" fill="url(#lidGrad)"/>
-        
-        <!-- Lid stripe -->
         <rect x="130" y="125" width="40" height="40" fill="rgba(255,255,255,0.3)"/>
-        
-        <!-- Ribbon vertical -->
         <rect x="138" y="30" width="24" height="135" fill="#FF8C00" rx="4"/>
-        
-        <!-- Bow left loop -->
         <ellipse cx="100" cy="55" rx="45" ry="28" fill="#FFA726" transform="rotate(-25 100 55)"/>
         <ellipse cx="100" cy="55" rx="33" ry="18" fill="#FFB74D" transform="rotate(-25 100 55)"/>
-        
-        <!-- Bow right loop -->
         <ellipse cx="200" cy="55" rx="45" ry="28" fill="#FFA726" transform="rotate(25 200 55)"/>
         <ellipse cx="200" cy="55" rx="33" ry="18" fill="#FFB74D" transform="rotate(25 200 55)"/>
-        
-        <!-- Bow center knot -->
         <ellipse cx="150" cy="52" rx="22" ry="18" fill="#FF8C00"/>
         <ellipse cx="150" cy="52" rx="14" ry="11" fill="#FFA726"/>
-        
-        <!-- Stars on box -->
         <text x="65" y="230" font-size="24" opacity="0.7">⭐</text>
         <text x="195" y="220" font-size="20" opacity="0.6">✨</text>
         <text x="80" y="270" font-size="16" opacity="0.5">🌸</text>
         <text x="185" y="268" font-size="18" opacity="0.6">🌺</text>
-        
-        <!-- Gradient defs -->
         <defs>
           <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
@@ -724,7 +689,6 @@
     </div>
   </div>
 
-  <!-- Text below gift -->
   <div class="opening-text">
     <h1>🎀 Ayo buka kadonyaa kiyoooK! 🎀</h1>
     <p class="tap-hint">✨ klik / tap kado untuk membuka ✨</p>
@@ -746,13 +710,11 @@
     <div class="slides-wrapper" id="slidesWrapper">
       <div class="slides-track" id="slidesTrack">
 
-        <!-- SLIDE 1: Foto waktu kecil -->
+        <!-- ═══ SLIDE 1: Foto waktu kecil ═══ -->
         <div class="slide">
- <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#FFE082;">
-            <img src="Foto1.jpg" alt="Foto waktu kecil" style="width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
-            <div class="photo-icon">👧🧒</div>
-            <div class="photo-label">📸 Masukkan foto waktu kecil berdua</div>
+          <div class="slide-photo">
+            <img src="Foto1.jpg" alt="Foto waktu kecil"
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>👧🧒</div><div class=\'photo-label\'>📸 Foto1.jpg</div></div>'">
           </div>
           <div class="slide-info">
             <div class="slide-number">Foto 01 / 06</div>
@@ -761,11 +723,11 @@
           </div>
         </div>
 
-        <!-- SLIDE 2: Foto waktu sekolah -->
+        <!-- ═══ SLIDE 2: Foto waktu sekolah ═══ -->
         <div class="slide">
-          <div class="photo-placeholder">
-            <div class="photo-icon">🎒📚</div>
-            <div class="photo-label">📸 Masukkan foto waktu sekolah</div>
+          <div class="slide-photo">
+            <img src="foto2.jpg" alt="Foto waktu sekolah"
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🎒📚</div><div class=\'photo-label\'>📸 foto2.jpg</div></div>'">
           </div>
           <div class="slide-info">
             <div class="slide-number">Foto 02 / 06</div>
@@ -774,11 +736,11 @@
           </div>
         </div>
 
-        <!-- SLIDE 3: Hunting food -->
+        <!-- ═══ SLIDE 3: Hunting food ═══ -->
         <div class="slide">
-          <div class="photo-placeholder">
-            <div class="photo-icon">🍜🍱</div>
-            <div class="photo-label">📸 Masukkan foto hunting food bareng</div>
+          <div class="slide-photo">
+            <img src="foto3.jpg" alt="Foto hunting food"
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🍜🍱</div><div class=\'photo-label\'>📸 foto3.jpg</div></div>'">
           </div>
           <div class="slide-info">
             <div class="slide-number">Foto 03 / 06</div>
@@ -787,11 +749,11 @@
           </div>
         </div>
 
-        <!-- SLIDE 4: Explore bareng -->
+        <!-- ═══ SLIDE 4: Explore bareng ═══ -->
         <div class="slide">
-          <div class="photo-placeholder">
-            <div class="photo-icon">🗺️🌿</div>
-            <div class="photo-label">📸 Masukkan foto explore bareng</div>
+          <div class="slide-photo">
+            <img src="foto4.jpg" alt="Foto explore bareng"
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🗺️🌿</div><div class=\'photo-label\'>📸 foto4.jpg</div></div>'">
           </div>
           <div class="slide-info">
             <div class="slide-number">Foto 04 / 06</div>
@@ -800,11 +762,11 @@
           </div>
         </div>
 
-        <!-- SLIDE 5: Nonton bioskop -->
+        <!-- ═══ SLIDE 5: Nonton bioskop ═══ -->
         <div class="slide">
-          <div class="photo-placeholder">
-            <div class="photo-icon">🎬🍿</div>
-            <div class="photo-label">📸 Masukkan foto waktu nonton bareng</div>
+          <div class="slide-photo">
+            <img src="foto5.jpg" alt="Foto nonton bareng"
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🎬🍿</div><div class=\'photo-label\'>📸 foto5.jpg</div></div>'">
           </div>
           <div class="slide-info">
             <div class="slide-number">Foto 05 / 06</div>
@@ -813,26 +775,20 @@
           </div>
         </div>
 
-        <!-- SLIDE 6: Lebaran + last slide special -->
+        <!-- ═══ SLIDE 6: Lebaran + typewriter ═══ -->
         <div class="slide">
-          <div class="photo-placeholder">
-            <div class="photo-icon">🌙🕌</div>
-            <div class="photo-label">📸 Masukkan foto waktu lebaran</div>
+          <div class="slide-photo">
+            <img src="foto6.jpg" alt="Foto lebaran"
+                 onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'><div class=\'photo-icon\'>🌙🕌</div><div class=\'photo-label\'>📸 foto6.jpg</div></div>'">
           </div>
           <div class="last-slide-content">
             <div class="slide-number" style="color: var(--yellow-deep);">Foto 06 / 06 · Momen Spesial</div>
             <div class="slide-title" style="font-family:'Baloo 2',cursive;font-size:clamp(16px,3.5vw,22px);color:var(--text-dark);margin-bottom:8px;">Momen Lebaran yang Selalu Cotonya Ngecoto banget</div>
-            
-            <!-- Typewriter area -->
             <div class="typewriter-text" id="typewriterText">
               <span id="typewriterContent"></span><span class="cursor-blink" id="cursor"></span>
             </div>
-
-            <!-- Crying doll -->
             <div id="cryingDoll" class="crying-doll" onclick="dollClicked(event)">🥺</div>
-            <div id="speechBubble" class="speech-bubble">
-              klik aku biar kamu terharu🥺
-            </div>
+            <div id="speechBubble" class="speech-bubble">klik aku biar kamu terharu🥺</div>
           </div>
         </div>
 
@@ -848,7 +804,7 @@
   </div>
 
   <button class="next-page-btn" id="nextPageBtn" onclick="goToPage(3)">
-    🎬 Ada pesan spesial buat Kiyook → 
+    🎬 Ada pesan spesial buat Kiyook →
   </button>
 
 </div>
@@ -863,20 +819,32 @@
     <p style="color:rgba(90,62,0,0.7);font-size:clamp(13px,2.5vw,16px);text-align:center;">dari orang yang paling sayang kamu~</p>
   </div>
 
+  <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  VIDEO SETUP — pilih salah satu cara di bawah:          ║
+    ║                                                          ║
+    ║  CARA 1 (Video lokal .mp4 di repo):                     ║
+    ║    Sudah aktif di bawah. Pastikan file                   ║
+    ║    "videokiyok (1).mp4" ada di folder yang sama.        ║
+    ║                                                          ║
+    ║  CARA 2 (YouTube embed):                                 ║
+    ║    Ganti <video> dengan:                                 ║
+    ║    <iframe src="https://www.youtube.com/embed/VIDEO_ID  ║
+    ║    ?autoplay=1" allowfullscreen allow="autoplay">        ║
+    ║    </iframe>                                             ║
+    ╚══════════════════════════════════════════════════════════╝
+  -->
   <div class="video-frame" id="videoFrame">
-    <!-- GANTI dengan YouTube embed link video kamu -->
-    <!-- Contoh: <iframe src="https://www.youtube.com/embed/VIDEO_ID_KAMU?autoplay=1" allowfullscreen allow="autoplay"></iframe> -->
-    <div class="video-placeholder-msg">
-      <div class="icon">🎬</div>
-      <p><strong>Ganti dengan video ucapanmu!</strong></p>
-      <p style="font-size:12px;margin-top:8px;color:#8B6914;">Edit HTML, cari komentar <code>GANTI dengan YouTube embed</code> lalu tambahkan iframe YouTube</p>
-      <code>https://www.youtube.com/watch?v=wqdV1ybjzOE&list=RDwqdV1ybjzOE&start_radio=1</code>
-    </div>
+    <!-- VIDEO LOKAL — nama file disesuaikan dengan repo GitHub kamu -->
+    <video controls autoplay playsinline
+           src="videokiyok (1).mp4"
+           onerror="this.outerHTML='<div style=\'text-align:center;padding:20px;color:#5A3E00\'><div style=\'font-size:60px\'>🎬</div><p style=\'font-family:Baloo 2,cursive;font-size:16px;margin-top:10px\'>Video tidak ditemukan.<br>Pastikan file <b>videokiyok (1).mp4</b><br>ada di folder yang sama.</p></div>'">
+      Browser kamu tidak mendukung video HTML5.
+    </video>
   </div>
 
   <div class="gift-reveal" id="giftReveal">
     <h3>🎁 Satu Lagi Kejutan Buat Kamu!</h3>
-    <!-- GANTI href dengan link dana kaget / kode voucher kopken kamu -->
     <button class="gift-link-btn" onclick="openGiftLink()">
       🧧 Buka Hadiah Spesial 🎁
     </button>
@@ -886,7 +854,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!--  PAGE 4: FINAL NOTIF (muncul setelah buka hadiah)           -->
+<!--  PAGE 4: FINAL NOTIF                                         -->
 <!-- ============================================================ -->
 <div id="page4" class="page">
 
@@ -987,7 +955,6 @@ function goToSlide(idx) {
   document.getElementById('prevBtn').disabled = idx === 0;
   document.getElementById('nextBtn').disabled = idx === totalSlides - 1;
 
-  // Show next page button on last slide
   if (idx === totalSlides - 1) {
     document.getElementById('nextPageBtn').style.display = 'block';
     startTypewriter();
@@ -1034,7 +1001,6 @@ function startTypewriter() {
       i++;
       setTimeout(type, 38);
     } else {
-      // Done typing
       cursor.style.display = 'none';
       typewriterDone = true;
       setTimeout(showDoll, 600);
@@ -1069,13 +1035,12 @@ function openGift() {
 }
 
 // ============================================================
-// MUSIC
+// MUSIC (background BGM via YouTube IFrame API)
 // ============================================================
 function startMusic() {
   if (musicStarted) return;
   musicStarted = true;
 
-  // Load YouTube IFrame API
   const tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(tag);
@@ -1084,7 +1049,7 @@ function startMusic() {
     ytPlayer = new YT.Player('ytPlayer', {
       height: '1',
       width: '1',
-      videoId: 'ZRCEaAFOtAU', // Happy Birthday song
+      videoId: 'ZRCEaAFOtAU',
       playerVars: { autoplay: 1, loop: 1, playlist: 'ZRCEaAFOtAU', controls: 0 },
       events: {
         onReady: (e) => {
@@ -1116,59 +1081,60 @@ function goToPage(num) {
 }
 
 // ============================================================
-// VIDEO CHECK → show gift after a while
+// VIDEO CHECK → show gift after video or skip button
 // ============================================================
 function startVideoCheck() {
-  // Show gift reveal after 30 seconds or user can click button
-  // For now auto-show after 30s as placeholder
-  clearInterval(videoCheckInterval);
-  videoCheckInterval = setTimeout(() => {
-    document.getElementById('giftReveal').style.display = 'block';
-    document.getElementById('giftReveal').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 30000); // 30 detik
+  clearTimeout(videoCheckInterval);
 
-  // Also add a manual trigger button
+  // Auto-show hadiah setelah 30 detik
+  videoCheckInterval = setTimeout(() => {
+    showGiftReveal();
+  }, 30000);
+
+  // Skip button muncul setelah 5 detik
   setTimeout(() => {
+    if (document.getElementById('giftReveal').style.display === 'block') return;
+    const existing = document.getElementById('skipBtn');
+    if (existing) return;
     const btn = document.createElement('button');
+    btn.id = 'skipBtn';
     btn.textContent = '⏭ Skip ke hadiah';
     btn.style.cssText = 'margin-top:12px;background:rgba(255,200,0,0.2);border:1px solid #FFD700;border-radius:50px;padding:8px 20px;font-family:Nunito,sans-serif;font-size:13px;color:#5A3E00;cursor:pointer;';
-    btn.onclick = () => {
-      document.getElementById('giftReveal').style.display = 'block';
-      document.getElementById('giftReveal').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      btn.remove();
-    };
+    btn.onclick = () => { showGiftReveal(); btn.remove(); };
     document.getElementById('page3').appendChild(btn);
   }, 5000);
+
+  // Juga auto-show saat video selesai
+  const vid = document.querySelector('#videoFrame video');
+  if (vid) {
+    vid.addEventListener('ended', showGiftReveal, { once: true });
+  }
+}
+
+function showGiftReveal() {
+  const el = document.getElementById('giftReveal');
+  if (el.style.display === 'block') return;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 // ============================================================
 // OPEN GIFT LINK (DANA KAGET)
 // ============================================================
 function openGiftLink() {
-  // GANTI URL_DANA_KAGET_KAMU dengan link dana kaget / kode voucher
   const giftUrl = 'https://link.dana.id/danakaget?c=slfw3atml&r=hy2tGb&orderId=20260522101214580315010300166218178804977';
-
-  // Coba buka di tab baru
   const newTab = window.open(giftUrl, '_blank');
-
-  // Jika di mobile dan link tidak terbuka (popup blocked), coba redirect
   if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
     window.location.href = giftUrl;
   }
-
-  // Setelah 2 detik, pindah ke halaman 4 (notif)
-  setTimeout(() => {
-    goToPage(4);
-  }, 2000);
-
-  // Juga tangkap saat user kembali ke tab ini
+  setTimeout(() => { goToPage(4); }, 2000);
   window.addEventListener('focus', function onFocus() {
     goToPage(4);
     window.removeEventListener('focus', onFocus);
   });
 }
 
-// Init page 1
+// Init
 goToPage(1);
 </script>
 
